@@ -66,10 +66,10 @@ function handleInputError({
     toast.error("パスワードが不一致");
     return false;
   }
-  // if (password.length < 6) {
-  //   toast.error("パスワードの長さが6文字以上");
-  //   return false;
-  // }
+  if (password.length < 6) {
+    toast.error("パスワードの長さが6文字以上");
+    return false;
+  }
   return true;
 }
 

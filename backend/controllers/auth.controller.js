@@ -56,8 +56,9 @@ export const login = async (req, res) => {
     const user = await User.findOne({ username });
 
     const isCoreet = bcrypt.compare(password, user?.password || "");
+    console.log(user);
     if (!user || !isCoreet) {
-      res.status(400).json({ error: "Invalid username or password" });
+      return res.status(400).json({ error: "Invalid username or password" });
     }
 
     generateTokenAndSetCookie(user._id.toString(), res);
@@ -76,7 +77,8 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
-    res.sendStatus(204);
+    //res.sendStatus(204)
+    res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.log("login Error", error);
     res.status(500).json({ error: "Internal server error" });
