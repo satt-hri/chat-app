@@ -11,7 +11,7 @@ const useGetMessages = () => {
         const getMessages = async() =>{
             try {
                 setLoading(true)
-                console.log("selectedConversation",selectedConversation)
+                //console.log("selectedConversation",selectedConversation)
                 const res = await fetch(`/api/message/${selectedConversation._id}`)
                 const data = await res.json();
                 if (data.error) {

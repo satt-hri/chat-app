@@ -2,11 +2,15 @@ import React from "react";
 import useConversation from "../../zustand/useConversation";
 
 const Conversation = ({ conversation, emoji, lastIdx }) => {
-  const { setSelectedConversation } = useConversation();
+  const { setSelectedConversation,selectedConversation } = useConversation();
+ // console.log(setSelectedConversation)
+  const isSelect = selectedConversation?._id == conversation._id;
   return (
     <>
       <div
-        className="flex gap-2  items-center hover:bg-sky-500 rounded p-2 py-2 cursor-pointer"
+        className={`flex gap-2  items-center hover:bg-sky-500 rounded p-2 py-2 cursor-pointer ${
+          isSelect ? "bg-sky-500" : ""
+        }`}
         onClick={() => setSelectedConversation(conversation)}
       >
         <div className="avatar online">
