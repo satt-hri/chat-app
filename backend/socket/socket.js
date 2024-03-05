@@ -11,12 +11,24 @@ const io = new Server(server, {
   },
 });
 
+const userSocketMap = {};
+
+export const getReceiverSocketId =(receiverId)=> userSocketMap[receiverId]
+
 io.on("connection", (socket) => {
   console.log("socket is connected", socket.id);
 
+  const userId = socket.handshake.query.userId;
+  if (userId) {
+    userSocketMap[userId] = socket.id;
+  }
+  io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
   socket.on("disconnect", () => {
     console.log("socket is disconnect", socket.id);
+    delete userSocketMap[userId]
+    io.emit("getOnlineUsers",Object.keys(userSocketMap))
   });
 });
 
-export { app, io ,server};
+export { app, io, server };
