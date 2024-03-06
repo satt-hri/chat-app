@@ -13,7 +13,7 @@ const io = new Server(server, {
 
 const userSocketMap = {};
 
-export const getReceiverSocketId =(receiverId)=> userSocketMap[receiverId]
+export const getReceiverSocketId = (receiverId) => userSocketMap[receiverId];
 
 io.on("connection", (socket) => {
   console.log("socket is connected", socket.id);
@@ -26,10 +26,9 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("socket is disconnect", socket.id);
-    delete userSocketMap[userId]
-    io.emit("getOnlineUsers",Object.keys(userSocketMap))
+    delete userSocketMap[userId];
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
->>>>>>> 0e2197b98fd05bce8d2cca4bcd8c0b1e8d3935cf
 });
 
 export { app, io, server };
