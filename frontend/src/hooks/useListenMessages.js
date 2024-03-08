@@ -5,9 +5,12 @@ import notificationSound from "../assets/sounds/notification.mp3";
 
 const useListenMessages = () => {
   const { socket } = useSocketContext();
-  const { messages, setMessages } = useConversation();
+  const { messages, setMessages,selectedConversation } = useConversation();
   useEffect(() => {
     socket?.on("newMessage", (message) => {
+      if (selectedConversation?._id != message?.senderId) {
+        return
+      }
       const sound = new Audio(notificationSound);
       message.shouldShake = true;
       try {
@@ -16,14 +19,14 @@ const useListenMessages = () => {
         //toast.error(error.message)
         console.log("socket newMessage",error)
       }
-      
-      setMessages([...messages, message]);
+      //debugger;
+      setMessages([...messages, message,]);
     });
 
     return () => {
       socket?.off("newMessage");
     };
-  }, [socket]);
+  }, [socket,messages,selectedConversation]);
 };
 
 export default useListenMessages;

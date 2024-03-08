@@ -4,7 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serve": "nodemon backend/server.js"
+    "start": "pm2 start backend/server.js ",
+    "stop": "pm2 stop server",
+    "serve": "nodemon backend/server.js",
+    "list": "pm2 list",
+    "log" :"pm2 logs",
+    "node-start":"node backend/server.js",
+    "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "type": "module",
   "keywords": [],
@@ -18,6 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.2",
+    "pm2": "^5.3.1",
     "socket.io": "^4.7.4"
   },
   "devDependencies": {
