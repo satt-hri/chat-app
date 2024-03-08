@@ -4,12 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "pm2 start backend/server.js ",
+    "pm2-start": "pm2 start backend/server.js ",
     "stop": "pm2 stop server",
     "serve": "nodemon backend/server.js",
     "list": "pm2 list",
     "log" :"pm2 logs",
-    "node-start":"node backend/server.js",
+    "start":"node backend/server.js",
     "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "type": "module",
