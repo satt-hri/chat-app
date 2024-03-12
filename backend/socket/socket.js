@@ -23,10 +23,11 @@ io.on("connection", (socket) => {
     userSocketMap[userId] = socket.id;
   }
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
-
+  console.log("userSocketMap",userSocketMap)
   socket.on("disconnect", () => {
     console.log("socket is disconnect", socket.id);
     delete userSocketMap[userId];
+    console.log("userSocketMap",userSocketMap)
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });

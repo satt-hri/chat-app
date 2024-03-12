@@ -2,10 +2,14 @@ import React, { useState,useEffect } from 'react'
 
 import useConversation from  "../zustand/useConversation"
 import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from '../context/AuthContext';
 
 const useGetMessages = () => {
     const [loading,setLoading] =  useState(false)
     const {messages,setMessages,selectedConversation } = useConversation()
+    const navigate = useNavigate()
+    const {setAuthUser} = useAuthContext()
 
     useEffect(() => {
         const getMessages = async() =>{
@@ -19,7 +23,10 @@ const useGetMessages = () => {
                 }
                 setMessages(data)
             } catch (error) {
-                toast.error(error)
+                toast.error(error.message)
+                localStorage.removeItem("chat-user");
+                setAuthUser(null)
+                //navigate("/login")
             }finally{
                 setLoading(false)
             }
