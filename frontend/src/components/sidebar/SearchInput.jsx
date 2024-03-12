@@ -4,9 +4,9 @@ import useGetConversations from '../../hooks/useGetConversations'
 import useConversation from "../../zustand/useConversation";
 import toast from "react-hot-toast";
 
-const SearchInput = () => {
+const SearchInput = ({ loading, conversations }) => {
   const [search,setSearch] = useState("")
-  const {conversations} = useGetConversations()
+  ///const {conversations} = useGetConversations()
   const { setSelectedConversation } = useConversation();
   const handleSubmit = (e) =>{
     e.preventDefault();

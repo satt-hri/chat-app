@@ -3,11 +3,11 @@ import Conversation from "./Conversation";
 import useGetConversations from "../../hooks/useGetConversations";
 import { getRandomEmoji } from "../../utils/emojis";
 
-const Conversations = () => {
-  const { loading, conversations } = useGetConversations();
+const Conversations = ({conversations,loading}) => {
+  //const { loading, conversations } = useGetConversations();
   return (
     <div className="flex flex-col overflow-auto py-2">
-      {conversations.map((conversation, i) => {
+      {conversations?.map((conversation, i) => {
         //console.log(conversation);
         return (
           <Conversation
