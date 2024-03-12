@@ -12,11 +12,16 @@ export const SocketContextProvider = ({ children }) => {
   const { authUser } = useAuthContext();
   useEffect(() => {
     if (authUser) {
-      const tempsocket = io("http://localhost:8000", {
-        query: {
-          userId: authUser._id,
-        },
-      });
+      const tempsocket = io(
+        process.env.NODE_ENV != "development"
+          ? "https://chat-gy7n.onrender.com/"
+          : "http://localhost:8000",
+        {
+          query: {
+            userId: authUser._id,
+          },
+        }
+      );
       setSocket(tempsocket);
       tempsocket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
