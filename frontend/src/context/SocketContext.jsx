@@ -13,9 +13,7 @@ export const SocketContextProvider = ({ children }) => {
   useEffect(() => {
     if (authUser) {
       const tempsocket = io(
-        process.env.NODE_ENV != "development"
-          ? "https://chat-gy7n.onrender.com/"
-          : "http://localhost:8000",
+        "https://chat-gy7n.onrender.com/",
         {
           query: {
             userId: authUser._id,
